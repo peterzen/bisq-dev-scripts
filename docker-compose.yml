@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  bitcoin-core:
+    image: ruimarinho/bitcoin-core
+    container_name: bitcoind
+#    networks: 
+#       hostnet: {}
+    network_mode: host
+    volumes:
+      - data:/home/bitcoin/.bitcoin
+    ports: 
+      - 18444
+      - 18443
+
+    command:
+      -printtoconsole
+      -regtest=1
+      -rpcbind=0.0.0.0
+#      -rpcallowip=172.17.0.0/16 
+
+volumes:
+  data:
+    driver: local
+#networks:
+#  hostnet:
+#    driver: host
+#    attachable: true
